@@ -80,7 +80,7 @@ bookRouter.put("/update", async (c) => {
   }
 });
 
-bookRouter.get("/post", async (c) => {
+bookRouter.get("/", async (c) => {
   const id = c.req.query("id");
   const userId = c.get("userId");
   const prisma = new PrismaClient({
