@@ -90,7 +90,7 @@ bookRouter.get("/", async (c) => {
   try {
     const blog = await prisma.post.findUnique({
       where: {
-        id,
+        id: Number(id),
         authorId: userId,
       },
     });
