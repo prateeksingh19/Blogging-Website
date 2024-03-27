@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Quote() {
   return (
     <div className="bg-cyan-50 h-screen flex flex-col justify-center pl-32">
