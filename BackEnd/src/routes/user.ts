@@ -41,9 +41,7 @@ userRouter.post("/signup", async (c) => {
       },
     });
     const token = await sign({ id: User.id }, c.env.JWT_SECRET);
-    return c.json({
-      token,
-    });
+    return c.text(token);
   } catch (e) {
     c.status(403);
     return c.json({ error: "error while signing up" });
@@ -71,9 +69,7 @@ userRouter.post("/signin", async (c) => {
     return c.json({ error: "User not found" });
   }
   const token = await sign({ id: User.id }, c.env.JWT_SECRET);
-  return c.json({
-    token,
-  });
+  return c.text(token);
 });
 
 const app = new Hono();
