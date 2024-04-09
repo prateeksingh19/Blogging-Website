@@ -14,16 +14,16 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
 
   return (
     <div className="font-roboto flex justify-center px-36">
-      <div className=" pt-10 max-w-26xl">
-        <div className="font-black text-6xl pb-4 max-w-5xl">{blog.title}</div>
+      <div className=" pt-10 w-full">
+        <div className="font-black text-6xl pb-4">{blog.title}</div>
         <div className="font-light text-md text-gray-700 pb-5">{`Posted on ${formatDate(
           blog.publishedDate
         )}`}</div>
-        <div className="text-xl text-gray-700 max-w-8xl pr-48">
+        <div className="text-xl text-gray-700 max-w-8xl pr-20">
           {blog.content}
         </div>
       </div>
-      <div className="flex flex-col w-full pt-12 px-5">
+      <div className="flex flex-col w-1/2 pt-12 px-5">
         <div className="font-bold pb-5">Author</div>
         <div className="flex">
           <div className="pt-4 pr-4">
@@ -31,8 +31,10 @@ export const FullBlog = ({ blog }: { blog: Blog }) => {
           </div>
           <div className="">
             <div className="font-extrabold text-xl">
-              {blog.author.name.charAt(0).toUpperCase() +
-                blog.author.name.slice(1) || "Anonymous"}
+              {blog.author.name
+                ? blog.author.name.charAt(0).toUpperCase() +
+                  blog.author.name.slice(1)
+                : "Anonymous"}
             </div>
             <div className="pt-1">
               Random catch phrase about the author's ability to grab the user's
