@@ -94,38 +94,58 @@ bookRouter.put("/update", async (c) => {
   }
 });
 
-bookRouter.get("/", async (c) => {
-  const id = c.req.query("id");
-  const userId = c.get("userId");
-  const prisma = new PrismaClient({
-    datasourceUrl: c.env.DATABASE_URL,
-  }).$extends(withAccelerate());
-
-  try {
-    const blog = await prisma.post.findUnique({
-      where: {
-        id: Number(id),
-        authorId: userId,
-      },
-    });
-    return c.json(blog);
-  } catch (err) {
-    c.status(403);
-    return c.json({ err });
-  }
-});
-
 bookRouter.get("/bulk", async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
   try {
-    const blog = await prisma.post.findMany({});
+    const blog = await prisma.post.findMany({
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
     return c.json(blog);
   } catch (error) {
     c.status(403);
     return c.json({ error });
+  }
+});
+
+bookRouter.get("/:id", async (c) => {
+  const id = c.req.param("id");
+  const userId = c.get("userId");
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  try {
+    const blog = await prisma.post.findFirst({
+      where: {
+        id: Number(id),
+      },
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    return c.json(blog);
+  } catch (err) {
+    c.status(403);
+    return c.json({ err });
   }
 });
 

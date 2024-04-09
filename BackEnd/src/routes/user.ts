@@ -38,6 +38,7 @@ userRouter.post("/signup", async (c) => {
       data: {
         email: body.email,
         password: body.password,
+        name: body.name || "Anonymous",
       },
     });
     const token = await sign({ id: User.id }, c.env.JWT_SECRET);
