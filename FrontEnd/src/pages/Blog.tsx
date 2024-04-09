@@ -20,6 +20,7 @@ export const Blog = () => {
   }
   return (
     <div>
+      <Appbar />
       <FullBlog blog={blog} />
     </div>
   );

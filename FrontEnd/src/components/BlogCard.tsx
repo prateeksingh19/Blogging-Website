@@ -16,22 +16,30 @@ export function BlogCard({
   content,
   publishedDate,
 }: BlogCardProps) {
+  const formatDate = (dateString: string) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    } as Intl.DateTimeFormatOptions;
+    return new Date(dateString).toLocaleDateString("en-US", options);
+  };
   return (
     <Link to={`/blog/${id}`}>
-      <div className="border-b-2 pb-6 pt-6 pl-10 w-screen max-w-screen-md cursor-pointer">
+      <div className="font-roboto border-b-2 pb-6 pt-6 pl-10 w-screen max-w-screen-md cursor-pointer">
         <div className="flex">
           <div className="flex flex-col justify-center">
             <Avatar size={"small"} name={authorName} />
           </div>
           <div className="flex">
             <div className="flex flex-col justify-center pl-2 font-medium text-lg">
-              {authorName}{" "}
+              {authorName.charAt(0).toUpperCase() + authorName.slice(1)}{" "}
             </div>
             <div className="flex flex-col justify-center text-lg text-grey-300 pl-1">
               &#128900;
             </div>
-            <div className="flex flex-col justify-center pl-1 text-lg font-light">
-              {publishedDate}
+            <div className="flex flex-col justify-center pl-1 text-md font-light">
+              {formatDate(publishedDate)}
             </div>
           </div>
         </div>

@@ -7,12 +7,17 @@ import { Skeleton } from "../components/Skeleton";
 export const Blogs = () => {
   const { loading, blogs } = useBlogs();
   if (loading) {
-    return <Skeleton />;
+    return (
+      <div>
+        <Appbar />
+        <Skeleton />
+      </div>
+    );
   }
   return (
     <div>
       <Appbar />
-      <div className="flex justify-center">
+      <div className="font-roboto flex justify-center">
         <div className="">
           {blogs.map((blog) => (
             <BlogCard
@@ -21,7 +26,7 @@ export const Blogs = () => {
               authorName={blog.author.name || "Anonymous"}
               title={blog.title}
               content={blog.content}
-              publishedDate="2nd Feb 2024"
+              publishedDate={blog.publishedDate}
             />
           ))}
         </div>
