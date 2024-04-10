@@ -54,7 +54,9 @@ bookRouter.post("/add", async (c) => {
       },
     });
     return c.json({
-      msg: `Blog added ${blog.id}`,
+      title: body.title,
+      content: body.content,
+      id: blog.id,
     });
   } catch (err) {
     c.status(403);
